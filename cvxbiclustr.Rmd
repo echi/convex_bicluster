@@ -130,37 +130,3 @@ heatmap(M,col=hmcols,labRow=NA,labCol=NA,ColSideCol=cols[ty],main="COBRA Smoothe
 ## Clustered dendrogram of the data
 heatmap(X, col=hmcols,labRow=NA,labCol=NA,ColSideCol=cols[ty],main="Clustered Dendrogram")
 ```
-
-<!--
-## Step 4 (optional): Employ post-processing - COBRA refinements
-
-It is well known that the Lasso tends to accumulate a larger active set that contains the true support. For the convex biclustering problem, this means that COBRA estimates may be result in fewer fusion events and consequently too many biclusters than desired. There are three post-processing functions: adaptive COBRA, thresholded COBRA, and mean-shift COBRA.
-
-**Adaptive COBRA**: The adaptive COBRA takes a COBRA solution and computes new weights treating the smoothed COBRA solution as the data. A COBRA solution is then fit using these weights. Details are in the supplement of the Biometrics paper.
-```{r adaptive COBRA}
-## Adaptive Lasso postprocessing
-sol_ad <- post_process_adaptive(X, sol$U[[ix_min]], phi, k_row, k_col, gammaSeq, fraction=0.01)
-
-## Heatmap of adaptive COBRA
-heatmap(sol_ad$Usmooth,col=hmcols,labRow=NA,labCol=NA,ColSideCol=cols[ty],main="Adaptive COBRA")
-```
-
-**Thresholded COBRA**: The thresholded COBRA takes a COBRA solution and applies hard thresholding on small pairwise differences. Details are in the supplement of the Biometrics paper.
-
-```{r thresholded COBRA}
-## Hard-threshold postprocessing
-sol_th <- post_process_threshold(sol$U[[ix_min]], sol$V_col[[ix_min]], sol$V_row[[ix_min]], E_col, E_row)
-
-## Heatmap of thresholded COBRA
-heatmap(sol_th$Usmooth,col=hmcols,labRow=NA,labCol=NA,ColSideCol=cols[ty],main="Thresholded COBRA")
-```
-
-**Mean-Shift COBRA**: The mean-shift COBRA takes a COBRA solution and applies the mean-shift algorithm on the rows and columns independently. A bandwidth input parameter controls how aggressive the smoothing is.
-```{r mean-shift}
-## Mean-shift postprocessing
-sol_ms <- post_process_mean_shift(sol$U[[ix_min]], phi=phi, k_row=k_row, k_col=k_col, bandwidth=0.01)
-
-## Heatmap of mean-shift COBRA
-heatmap(sol_ms$Usmooth,col=hmcols,labRow=NA,labCol=NA,ColSideCol=cols[ty],main="Mean-Shift COBRA")
-```
--->
